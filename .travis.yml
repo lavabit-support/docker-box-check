@@ -29,7 +29,7 @@ script:
   - wait
   - docker images
   - export RESULT=`cat failure.log | wc -l`
-  - ifconfig eth0 | grep --extended-regexp --color=none "RX packets|TX packets"
+  - ifconfig eth0 | grep --extended-regexp --color=none "RX bytes|TX bytes"
   - cat failure.log | sort
   - echo "Version ${VERSION}"
   - echo "Total Failures ${RESULT}"
