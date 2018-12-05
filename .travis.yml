@@ -1,0 +1,26 @@
+os: linux
+language: c
+dist: trusty
+group: stable
+compiler: gcc
+env:
+  - VERSION="1.8.50"
+notifications:
+  email:
+    recipients:
+      - make@roboxes.org
+    on_success: never
+    on_failure: never
+script:
+  - docker pull roboxes/centos6:$VERSION || exit 1
+  - docker pull roboxes/centos7:$VERSION || exit 1
+  - docker pull lavabit/magma:$VERSION || exit 1
+  - docker pull lavabit/magma-centos:$VERSION || exit 1
+  - docker pull lavabit/magma-centos6:$VERSION || exit 1
+  - docker pull lavabit/magma-centos7:$VERSION || exit 1
+  - docker pull roboxes/centos6:latest || exit 1
+  - docker pull roboxes/centos7:latest || exit 1
+  - docker pull lavabit/magma:latest || exit 1
+  - docker pull lavabit/magma-centos:latest || exit 1
+  - docker pull lavabit/magma-centos6:latest || exit 1
+  - docker pull lavabit/magma-centos7:latest || exit 1
