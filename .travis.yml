@@ -27,6 +27,7 @@ script:
   - (docker pull lavabit/magma-centos6:latest&> /dev/null || (echo "magma-centos6-latest failed" | tee -a failure.log) && echo "magma-centos6-latest complete") &
   - (docker pull lavabit/magma-centos7:latest&> /dev/null || (echo "magma-centos7-latest failed" | tee -a failure.log) && echo "magma-centos7-latest complete") &
   - wait
+  - docker images
   - export RESULT=`cat failure.log | wc -l`
   - ifconfig eth0 | grep --extended-regexp --color=none "RX packets|TX packets"
   - cat failure.log | sort
