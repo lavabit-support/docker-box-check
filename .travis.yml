@@ -27,6 +27,7 @@ script:
   - (docker pull lavabit/magma-centos6:latest || (echo "magma-centos6-latest failed" | tee -a failure.log) && echo "magma-centos6-latest complete") &
   - (docker pull lavabit/magma-centos7:latest || (echo "magma-centos7-latest failed" | tee -a failure.log) && echo "magma-centos7-latest complete") &
   - wait
+  - docker images
   - export RESULT=`cat failure.log | wc -l`
   - cat failure.log | sort
   - echo "Version ${VERSION}"
