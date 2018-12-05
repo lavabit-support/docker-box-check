@@ -14,30 +14,19 @@ notifications:
 script:
   - touch failure.log
   - (for ((i = 0; i < 60; ++i)); do date ; sleep 480; done) & looper=$! ; disown
-  - (docker pull roboxes/centos6:$VERSION || (echo "roboxes-centos6-version failed" | tee -a failure.log) && echo "roboxes-centos6-version complete") & roboxes_centos6_version=$!
-  - (docker pull roboxes/centos7:$VERSION || (echo "roboxes-centos7-version failed" | tee -a failure.log) && echo "roboxes-centos7-version complete") & roboxes_centos7_version=$!
-  - (docker pull lavabit/magma:$VERSION || (echo "magma-version failed" | tee -a failure.log) && echo "magma-version complete") & magma_version=$!
-  - (docker pull lavabit/magma-centos:$VERSION || (echo "magma-centos-version failed" | tee -a failure.log) && echo "magma-centos-version complete") & magma_centos_version=$!
-  - (docker pull lavabit/magma-centos6:$VERSION || (echo "magma-centos6-version failed" | tee -a failure.log) && echo "magma-centos6-version complete") & magma_centos6_version=$!
-  - (docker pull lavabit/magma-centos7:$VERSION || (echo "magma-centos7-version failed" | tee -a failure.log) && echo "magma-centos7-version complete") & magma_centos7_version=$!
-  - (docker pull roboxes/centos6:latest || (echo "roboxes-centos6-latest failed" | tee -a failure.log) && echo "roboxes-centos6-latest complete") & roboxes_centos6_latest=$!
-  - (docker pull roboxes/centos7:latest || (echo "roboxes-centos7-latest failed" | tee -a failure.log) && echo "roboxes-centos7-latest complete") & roboxes_centos7_latest=$!
-  - (docker pull lavabit/magma:latest || (echo "magma-latest failed" | tee -a failure.log) && echo "magma-latest complete") & magma_latest=$!
-  - (docker pull lavabit/magma-centos:latest || (echo "magma-centos-latest failed" | tee -a failure.log) && echo "magma-centos-latest complete") & magma_centos_latest=$!
-  - (docker pull lavabit/magma-centos6:latest || (echo "magma-centos6-latest failed" | tee -a failure.log) && echo "magma-centos6-latest complete") & magma_centos6_latest=$!
-  - (docker pull lavabit/magma-centos7:latest || (echo "magma-centos7-latest failed" | tee -a failure.log) && echo "magma-centos7-latest complete") & magma_centos7_latest=$!
-  - wait roboxes_centos6_version
-  - wait roboxes_centos7_version
-  - wait magma_version
-  - wait magma_centos_version
-  - wait magma_centos6_version
-  - wait magma_centos7_version
-  - wait roboxes_centos6_latest
-  - wait roboxes_centos7_latest
-  - wait magma_latest
-  - wait magma_centos_latest
-  - wait magma_centos6_latest
-  - wait magma_centos7_latest
+  - (docker pull roboxes/centos6:$VERSION || (echo "roboxes-centos6-version failed" | tee -a failure.log) && echo "roboxes-centos6-version complete") &
+  - (docker pull roboxes/centos7:$VERSION || (echo "roboxes-centos7-version failed" | tee -a failure.log) && echo "roboxes-centos7-version complete") &
+  - (docker pull lavabit/magma:$VERSION || (echo "magma-version failed" | tee -a failure.log) && echo "magma-version complete") &
+  - (docker pull lavabit/magma-centos:$VERSION || (echo "magma-centos-version failed" | tee -a failure.log) && echo "magma-centos-version complete") &
+  - (docker pull lavabit/magma-centos6:$VERSION || (echo "magma-centos6-version failed" | tee -a failure.log) && echo "magma-centos6-version complete") &
+  - (docker pull lavabit/magma-centos7:$VERSION || (echo "magma-centos7-version failed" | tee -a failure.log) && echo "magma-centos7-version complete") &
+  - (docker pull roboxes/centos6:latest || (echo "roboxes-centos6-latest failed" | tee -a failure.log) && echo "roboxes-centos6-latest complete") &
+  - (docker pull roboxes/centos7:latest || (echo "roboxes-centos7-latest failed" | tee -a failure.log) && echo "roboxes-centos7-latest complete") &
+  - (docker pull lavabit/magma:latest || (echo "magma-latest failed" | tee -a failure.log) && echo "magma-latest complete") &
+  - (docker pull lavabit/magma-centos:latest || (echo "magma-centos-latest failed" | tee -a failure.log) && echo "magma-centos-latest complete") &
+  - (docker pull lavabit/magma-centos6:latest || (echo "magma-centos6-latest failed" | tee -a failure.log) && echo "magma-centos6-latest complete") &
+  - (docker pull lavabit/magma-centos7:latest || (echo "magma-centos7-latest failed" | tee -a failure.log) && echo "magma-centos7-latest complete") &
+  - wait
   - export RESULT=`cat failure.log | wc -l`
   - cat failure.log | sort
   - echo "Version ${VERSION}"
