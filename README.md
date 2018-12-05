@@ -1,3 +1,3 @@
-# vagrant-box-check 
+# docker-box-check 
 
-Download and verify whether the various vagrant images are still available.
+Download and verify the various roboxes docker images are available and working.
