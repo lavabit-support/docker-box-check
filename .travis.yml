@@ -49,8 +49,8 @@ script:
   - wait
   - docker ps -a && docker rm `docker ps -q -a`
   - docker images -a && docker rmi `docker images -q -a`
-  - export RESULT=`cat failure.log | wc -l`
   - ifconfig # eth0 | grep --extended-regexp --color=none "RX bytes|TX bytes"
+  - export RESULT=`cat failure.log | wc -l`
   - cat failure.log | sort
   - echo "Version ${VERSION}"
   - echo "Total Failures ${RESULT}"
