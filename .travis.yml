@@ -1,16 +1,22 @@
-os: linux
+
 language: c
-dist: trusty
-group: stable
 compiler: gcc
 env:
-  - VERSION="1.8.52"
+  - VERSION="1.8.54"
+matrix:
+  include:
+    - stage: trusty
+      os: linux
+      dist: trusty
+    - stage: xenial
+      os: linux
+      dist: xenial
 notifications:
   email:
     recipients:
       - make@roboxes.org
     on_success: change
-    on_failure: always
+    on_failure: change
 script:
   - touch failure.log
   - (for ((i = 0; i < 60; ++i)); do date ; sleep 480; done) & looper=$! ; disown
