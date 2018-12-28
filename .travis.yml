@@ -49,7 +49,7 @@ script:
   - wait
   - docker ps -a && docker rm `docker ps -q -a`
   - docker images -a && docker rmi `docker images -q -a`
-  - ifconfig # eth0 | grep --extended-regexp --color=none "RX bytes|TX bytes"
+  - ifconfig | grep --extended-regexp --color=none "encap:Ethernet  HWaddr|RX bytes|TX bytes" | head -n -1
   - export RESULT=`cat failure.log | wc -l`
   - cat failure.log | sort
   - echo "Version ${VERSION}"
