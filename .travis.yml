@@ -1,4 +1,4 @@
-
+os: linux
 language: c
 compiler: gcc
 env:
@@ -6,14 +6,11 @@ env:
 matrix:
   include:
     - stage: trusty
-      os: linux
+      name: Trusty 1.8.54
       dist: trusty
     - stage: xenial
-      os: linux
+      name: Xenial 1.8.54
       dist: xenial
-      install:
-        - sudo apt-get update
-        - sudo -E apt-get -yq --no-install-suggests --no-install-recommends install net-tools
 notifications:
   email:
     recipients:
@@ -52,8 +49,8 @@ script:
   - wait
   - docker ps -a && docker rm `docker ps -q -a`
   - docker images -a && docker rmi `docker images -q -a`
+  - ifconfig | grep --extended-regexp --color=none "encap:Ethernet  HWaddr|RX bytes|TX bytes" | head -n -1
   - export RESULT=`cat failure.log | wc -l`
-  - ifconfig eth0 | grep --extended-regexp --color=none "RX bytes|TX bytes"
   - cat failure.log | sort
   - echo "Version ${VERSION}"
   - echo "Total Failures ${RESULT}"
