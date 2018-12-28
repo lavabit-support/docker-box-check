@@ -1,4 +1,4 @@
-
+os: linux
 language: c
 compiler: gcc
 env:
@@ -6,14 +6,11 @@ env:
 matrix:
   include:
     - stage: trusty
-      os: linux
+      name: trusty
       dist: trusty
     - stage: xenial
-      os: linux
+      name: xenial
       dist: xenial
-      install:
-        - sudo apt-get update
-        - sudo -E apt-get -yq --no-install-suggests --no-install-recommends install net-tools
 notifications:
   email:
     recipients:
@@ -53,7 +50,7 @@ script:
   - docker ps -a && docker rm `docker ps -q -a`
   - docker images -a && docker rmi `docker images -q -a`
   - export RESULT=`cat failure.log | wc -l`
-  - ifconfig eth0 | grep --extended-regexp --color=none "RX bytes|TX bytes"
+  - ifconfig # eth0 | grep --extended-regexp --color=none "RX bytes|TX bytes"
   - cat failure.log | sort
   - echo "Version ${VERSION}"
   - echo "Total Failures ${RESULT}"
