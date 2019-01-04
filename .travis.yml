@@ -19,33 +19,33 @@ notifications:
     on_failure: change
 script:
   - touch failure.log
-  - (for ((i = 0; i < 60; ++i)); do date ; sleep 480; done) & looper=$! ; disown
-  - (docker pull roboxes/centos6:$VERSION &> /dev/null || (echo "roboxes-centos6-version download failed" | tee -a failure.log) && echo "roboxes-centos6-version download complete") &
-  - (docker pull roboxes/centos7:$VERSION &> /dev/null || (echo "roboxes-centos7-version download failed" | tee -a failure.log) && echo "roboxes-centos7-version download complete") &
-  - (docker pull lavabit/magma:$VERSION &> /dev/null || (echo "magma-version download failed" | tee -a failure.log) && echo "magma-version download complete") &
-  - (docker pull lavabit/magma-centos:$VERSION &> /dev/null || (echo "magma-centos-version download failed" | tee -a failure.log) && echo "magma-centos-version download complete") &
-  - (docker pull lavabit/magma-centos6:$VERSION &> /dev/null || (echo "magma-centos6-version download failed" | tee -a failure.log) && echo "magma-centos6-version download complete") &
-  - (docker pull lavabit/magma-centos7:$VERSION &> /dev/null || (echo "magma-centos7-version download failed" | tee -a failure.log) && echo "magma-centos7-version download complete") &
-  - (docker pull roboxes/centos6:latest &> /dev/null || (echo "roboxes-centos6-latest download failed" | tee -a failure.log) && echo "roboxes-centos6-latest download complete") &
-  - (docker pull roboxes/centos7:latest &> /dev/null || (echo "roboxes-centos7-latest download failed" | tee -a failure.log) && echo "roboxes-centos7-latest download complete") &
-  - (docker pull lavabit/magma:latest &> /dev/null || (echo "magma-latest download failed" | tee -a failure.log) && echo "magma-latest download complete") &
-  - (docker pull lavabit/magma-centos:latest &> /dev/null || (echo "magma-centos-latest download failed" | tee -a failure.log) && echo "magma-centos-latest download complete") &
-  - (docker pull lavabit/magma-centos6:latest &> /dev/null || (echo "magma-centos6-latest download failed" | tee -a failure.log) && echo "magma-centos6-latest download complete") &
-  - (docker pull lavabit/magma-centos7:latest &> /dev/null || (echo "magma-centos7-latest download failed" | tee -a failure.log) && echo "magma-centos7-latest download complete") &
+  - (for ((i = 0; i < 256; ++i)); do sleep 20 ; printf "%s (%s )\n" "`date`" "`uptime`" ; done) & LOOP_PID=$! ; disown
+  - (travis_retry docker pull roboxes/centos6:$VERSION &> /dev/null || (echo "roboxes-centos6-version download failed" | tee -a failure.log) && echo "roboxes-centos6-version download complete") &
+  - (travis_retry docker pull roboxes/centos7:$VERSION &> /dev/null || (echo "roboxes-centos7-version download failed" | tee -a failure.log) && echo "roboxes-centos7-version download complete") &
+  - (travis_retry docker pull lavabit/magma:$VERSION &> /dev/null || (echo "magma-version download failed" | tee -a failure.log) && echo "magma-version download complete") &
+  - (travis_retry docker pull lavabit/magma-centos:$VERSION &> /dev/null || (echo "magma-centos-version download failed" | tee -a failure.log) && echo "magma-centos-version download complete") &
+  - (travis_retry docker pull lavabit/magma-centos6:$VERSION &> /dev/null || (echo "magma-centos6-version download failed" | tee -a failure.log) && echo "magma-centos6-version download complete") &
+  - (travis_retry docker pull lavabit/magma-centos7:$VERSION &> /dev/null || (echo "magma-centos7-version download failed" | tee -a failure.log) && echo "magma-centos7-version download complete") &
+  - (travis_retry docker pull roboxes/centos6:latest &> /dev/null || (echo "roboxes-centos6-latest download failed" | tee -a failure.log) && echo "roboxes-centos6-latest download complete") &
+  - (travis_retry docker pull roboxes/centos7:latest &> /dev/null || (echo "roboxes-centos7-latest download failed" | tee -a failure.log) && echo "roboxes-centos7-latest download complete") &
+  - (travis_retry docker pull lavabit/magma:latest &> /dev/null || (echo "magma-latest download failed" | tee -a failure.log) && echo "magma-latest download complete") &
+  - (travis_retry docker pull lavabit/magma-centos:latest &> /dev/null || (echo "magma-centos-latest download failed" | tee -a failure.log) && echo "magma-centos-latest download complete") &
+  - (travis_retry docker pull lavabit/magma-centos6:latest &> /dev/null || (echo "magma-centos6-latest download failed" | tee -a failure.log) && echo "magma-centos6-latest download complete") &
+  - (travis_retry docker pull lavabit/magma-centos7:latest &> /dev/null || (echo "magma-centos7-latest download failed" | tee -a failure.log) && echo "magma-centos7-latest download complete") &
   - wait
   - docker images -a && docker rmi `docker images -q -a`
-  - (docker run roboxes/centos6:$VERSION curl --silent --show-error https://lavabit.com > /dev/null || (echo "roboxes-centos6-version run failed" | tee -a failure.log) && echo "roboxes-centos6-version run complete") &
-  - (docker run roboxes/centos7:$VERSION curl --silent --show-error https://lavabit.com > /dev/null || (echo "roboxes-centos7-version run failed" | tee -a failure.log) && echo "roboxes-centos7-version run complete") &
-  - (docker run lavabit/magma:$VERSION curl --silent --show-error https://lavabit.com > /dev/null || (echo "magma-version run failed" | tee -a failure.log) && echo "magma-version run complete") &
-  - (docker run lavabit/magma-centos:$VERSION curl --silent --show-error https://lavabit.com > /dev/null || (echo "magma-centos-version run failed" | tee -a failure.log) && echo "magma-centos-version run complete") &
-  - (docker run lavabit/magma-centos6:$VERSION curl --silent --show-error https://lavabit.com > /dev/null || (echo "magma-centos6-version run failed" | tee -a failure.log) && echo "magma-centos6-version run complete") &
-  - (docker run lavabit/magma-centos7:$VERSION curl --silent --show-error https://lavabit.com > /dev/null || (echo "magma-centos7-version run failed" | tee -a failure.log) && echo "magma-centos7-version run complete") &
-  - (docker run roboxes/centos6:latest curl --silent --show-error https://lavabit.com > /dev/null || (echo "roboxes-centos6-latest run failed" | tee -a failure.log) && echo "roboxes-centos6-latest run complete") &
-  - (docker run roboxes/centos7:latest curl --silent --show-error https://lavabit.com > /dev/null || (echo "roboxes-centos7-latest run failed" | tee -a failure.log) && echo "roboxes-centos7-latest run complete") &
-  - (docker run lavabit/magma:latest curl --silent --show-error https://lavabit.com > /dev/null || (echo "magma-latest run failed" | tee -a failure.log) && echo "magma-latest run complete") &
-  - (docker run lavabit/magma-centos:latest curl --silent --show-error https://lavabit.com > /dev/null || (echo "magma-centos-latest run failed" | tee -a failure.log) && echo "magma-centos-latest run complete") &
-  - (docker run lavabit/magma-centos6:latest curl --silent --show-error https://lavabit.com > /dev/null || (echo "magma-centos6-latest run failed" | tee -a failure.log) && echo "magma-centos6-latest run complete") &
-  - (docker run lavabit/magma-centos7:latest curl --silent --show-error https://lavabit.com > /dev/null || (echo "magma-centos7-latest run failed" | tee -a failure.log) && echo "magma-centos7-latest run complete") &
+  - (travis_retry docker run roboxes/centos6:$VERSION curl --silent --show-error https://lavabit.com > /dev/null || (echo "roboxes-centos6-version run failed" | tee -a failure.log) && echo "roboxes-centos6-version run complete") &
+  - (travis_retry docker run roboxes/centos7:$VERSION curl --silent --show-error https://lavabit.com > /dev/null || (echo "roboxes-centos7-version run failed" | tee -a failure.log) && echo "roboxes-centos7-version run complete") &
+  - (travis_retry docker run lavabit/magma:$VERSION curl --silent --show-error https://lavabit.com > /dev/null || (echo "magma-version run failed" | tee -a failure.log) && echo "magma-version run complete") &
+  - (travis_retry docker run lavabit/magma-centos:$VERSION curl --silent --show-error https://lavabit.com > /dev/null || (echo "magma-centos-version run failed" | tee -a failure.log) && echo "magma-centos-version run complete") &
+  - (travis_retry docker run lavabit/magma-centos6:$VERSION curl --silent --show-error https://lavabit.com > /dev/null || (echo "magma-centos6-version run failed" | tee -a failure.log) && echo "magma-centos6-version run complete") &
+  - (travis_retry docker run lavabit/magma-centos7:$VERSION curl --silent --show-error https://lavabit.com > /dev/null || (echo "magma-centos7-version run failed" | tee -a failure.log) && echo "magma-centos7-version run complete") &
+  - (travis_retry docker run roboxes/centos6:latest curl --silent --show-error https://lavabit.com > /dev/null || (echo "roboxes-centos6-latest run failed" | tee -a failure.log) && echo "roboxes-centos6-latest run complete") &
+  - (travis_retry docker run roboxes/centos7:latest curl --silent --show-error https://lavabit.com > /dev/null || (echo "roboxes-centos7-latest run failed" | tee -a failure.log) && echo "roboxes-centos7-latest run complete") &
+  - (travis_retry docker run lavabit/magma:latest curl --silent --show-error https://lavabit.com > /dev/null || (echo "magma-latest run failed" | tee -a failure.log) && echo "magma-latest run complete") &
+  - (travis_retry docker run lavabit/magma-centos:latest curl --silent --show-error https://lavabit.com > /dev/null || (echo "magma-centos-latest run failed" | tee -a failure.log) && echo "magma-centos-latest run complete") &
+  - (travis_retry docker run lavabit/magma-centos6:latest curl --silent --show-error https://lavabit.com > /dev/null || (echo "magma-centos6-latest run failed" | tee -a failure.log) && echo "magma-centos6-latest run complete") &
+  - (travis_retry docker run lavabit/magma-centos7:latest curl --silent --show-error https://lavabit.com > /dev/null || (echo "magma-centos7-latest run failed" | tee -a failure.log) && echo "magma-centos7-latest run complete") &
   - wait
   - docker ps -a && docker rm `docker ps -q -a`
   - docker images -a && docker rmi `docker images -q -a`
