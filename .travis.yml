@@ -2,7 +2,7 @@ os: linux
 language: c
 compiler: gcc
 env:
-  - VERSION="1.8.58"
+  - VERSION="1.8.60"
 matrix:
   include:
     - stage: trusty
