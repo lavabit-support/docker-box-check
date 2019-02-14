@@ -68,8 +68,9 @@ script:
   - wait
   - docker rm `docker ps -q -a` && docker rmi `docker images -q -a`
   - ifconfig | grep --extended-regexp --color=none "encap:Ethernet  HWaddr|RX bytes|TX bytes" | head -n -1
-  - export RESULT=`cat failure.log | wc -l`
-  - cat failure.log | sort
+  - export RESULT=`cat failed.log | wc -l`
+  - cat failed.log | sort
   - echo "Version ${VERSION}"
   - echo "Total Failures ${RESULT}"
   - if [[ $RESULT != 0 ]]; then exit 1; fi
+  - exit 0
