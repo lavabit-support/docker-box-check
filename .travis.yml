@@ -1,14 +1,14 @@
 os: linux
 language: generic
 env:
-  - VERSION="1.9.2"
+  - VERSION="1.9.4"
 matrix:
   include:
     - stage: trusty
-      name: Trusty 1.9.2
+      name: Trusty 1.9.4
       dist: trusty
     - stage: xenial
-      name: Xenial 1.9.2
+      name: Xenial 1.9.4
       dist: xenial
 notifications:
   email:
