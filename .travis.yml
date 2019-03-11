@@ -1,15 +1,37 @@
 os: linux
 language: generic
-env:
-  - VERSION="1.9.4"
 matrix:
   include:
     - stage: trusty
+      name: Trusty 1.9.6
+      dist: trusty
+      env:
+        - VERSION="1.9.6"
+    - stage: trusty
       name: Trusty 1.9.4
       dist: trusty
+      env:
+        - VERSION="1.9.4"
+    - stage: trusty
+      name: Trusty 1.9.2
+      dist: trusty
+      env:
+        - VERSION="1.9.2"
+    - stage: xenial
+      name: Xenial 1.9.6
+      dist: xenial
+      env:
+        - VERSION="1.9.6"
     - stage: xenial
       name: Xenial 1.9.4
       dist: xenial
+      env:
+        - VERSION="1.9.4"
+    - stage: xenial
+      name: Xenial 1.9.2
+      dist: xenial
+      env:
+        - VERSION="1.9.2"
 notifications:
   email:
     recipients:
@@ -18,7 +40,7 @@ notifications:
     on_failure: change
 script:
   - touch failed.log ; touch retry.log ; touch passed.log ; function travis_result() { echo &> /dev/null ; }
-  - (curl --silent --user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" --output /dev/null --url https://lavabit.com --output /dev/null --url https://roboxes.org) & CURL_PID=$! ; disown
+  - (curl --silent --user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" --output /dev/null --url https://lavabit.com --output /dev/null --url https://roboxes.org --output /dev/null --url https://republic.co/lavabit) & CURL_PID=$! ; disown
   - (for ((i = 0; i < 256; ++i)); do sleep 20 ; printf "%s (%s )\n" "`date`" "`uptime`" ; done) & LOOP_PID=$! ; disown
   - (travis_retry docker pull roboxes/centos6:$VERSION &> /dev/null || (echo "roboxes-centos6-version download failed" | tee -a failed.log) && echo "roboxes-centos6-version download complete") &
   - (travis_retry docker pull roboxes/centos7:$VERSION &> /dev/null || (echo "roboxes-centos7-version download failed" | tee -a failed.log) && echo "roboxes-centos7-version download complete") &
