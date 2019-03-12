@@ -6,10 +6,10 @@ env:
 matrix:
   include:
     - stage: trusty
-      name: Trusty 1.8.56
+      name: TRUSTY / 1.8.56
       dist: trusty
     - stage: xenial
-      name: Xenial 1.8.56
+      name: XENIAL / 1.8.56
       dist: xenial
 notifications:
   email:
