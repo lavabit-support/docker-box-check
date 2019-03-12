@@ -18,7 +18,7 @@ matrix:
       dist: xenial
       env:
         - VERSION="1.9.6"
-    - name: Xenial 1.9.4
+    - name: XENIAL / 1.9.4
       dist: xenial
       env:
         - VERSION="1.9.4"
