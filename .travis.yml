@@ -2,33 +2,27 @@ os: linux
 language: generic
 matrix:
   include:
-    - stage: trusty
-      name: TRUSTY / 1.9.6
+    - name: TRUSTY / 1.9.6
       dist: trusty
       env:
         - VERSION="1.9.6"
-    - stage: trusty
-      name: TRUSTY / 1.9.4
+    - name: TRUSTY / 1.9.4
       dist: trusty
       env:
         - VERSION="1.9.4"
-    - stage: trusty
-      name: TRUSTY / 1.9.2
+    - name: TRUSTY / 1.9.2
       dist: trusty
       env:
         - VERSION="1.9.2"
-    - stage: xenial
-      name: XENIAL / 1.9.6
+    - name: XENIAL / 1.9.6
       dist: xenial
       env:
         - VERSION="1.9.6"
-    - stage: xenial
-      name: Xenial 1.9.4
+    - name: Xenial 1.9.4
       dist: xenial
       env:
         - VERSION="1.9.4"
-    - stage: xenial
-      name: XENIAL / 1.9.2
+    - name: XENIAL / 1.9.2
       dist: xenial
       env:
         - VERSION="1.9.2"
