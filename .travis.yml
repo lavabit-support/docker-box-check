@@ -2,6 +2,10 @@ os: linux
 language: generic
 matrix:
   include:
+    - name: TRUSTY / 1.9.8
+      dist: trusty
+      env:
+        - VERSION="1.9.8"
     - name: TRUSTY / 1.9.6
       dist: trusty
       env:
@@ -14,6 +18,10 @@ matrix:
       dist: trusty
       env:
         - VERSION="1.9.2"
+    - name: XENIAL / 1.9.8
+      dist: xenial
+      env:
+        - VERSION="1.9.8"
     - name: XENIAL / 1.9.6
       dist: xenial
       env:
