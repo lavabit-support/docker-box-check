@@ -2,6 +2,54 @@ os: linux
 language: generic
 matrix:
   include:
+    - name: TRUSTY / 1.9.32
+      dist: trusty
+      env:
+        - VERSION="1.9.32"
+    - name: XENIAL / 1.9.32
+      dist: xenial
+      env:
+        - VERSION="1.9.32"
+    - name: TRUSTY / 1.9.30
+      dist: trusty
+      env:
+        - VERSION="1.9.30"
+    - name: XENIAL / 1.9.30
+      dist: xenial
+      env:
+        - VERSION="1.9.30"
+    - name: TRUSTY / 1.9.28
+      dist: trusty
+      env:
+        - VERSION="1.9.28"
+    - name: XENIAL / 1.9.28
+      dist: xenial
+      env:
+        - VERSION="1.9.28"
+    - name: TRUSTY / 1.9.26
+      dist: trusty
+      env:
+        - VERSION="1.9.26"
+    - name: XENIAL / 1.9.26
+      dist: xenial
+      env:
+        - VERSION="1.9.26"
+    - name: TRUSTY / 1.9.24
+      dist: trusty
+      env:
+        - VERSION="1.9.24"
+    - name: XENIAL / 1.9.24
+      dist: xenial
+      env:
+        - VERSION="1.9.24"
+    - name: TRUSTY / 1.9.22
+      dist: trusty
+      env:
+        - VERSION="1.9.22"
+    - name: XENIAL / 1.9.22
+      dist: xenial
+      env:
+        - VERSION="1.9.22"
     - name: TRUSTY / 1.9.20
       dist: trusty
       env:
@@ -10,22 +58,6 @@ matrix:
       dist: xenial
       env:
         - VERSION="1.9.20"
-    - name: TRUSTY / 1.9.18
-      dist: trusty
-      env:
-        - VERSION="1.9.18"
-    - name: XENIAL / 1.9.18
-      dist: xenial
-      env:
-        - VERSION="1.9.18"
-    - name: TRUSTY / 1.9.16
-      dist: trusty
-      env:
-        - VERSION="1.9.16"
-    - name: XENIAL / 1.9.16
-      dist: xenial
-      env:
-        - VERSION="1.9.16"
 notifications:
   email:
     recipients:
@@ -38,6 +70,7 @@ script:
   - (for ((i = 0; i < 256; ++i)); do sleep 20 ; printf "%s (%s )\n" "`date`" "`uptime`" ; done) & LOOP_PID=$! ; disown
   - (travis_retry docker pull roboxes/centos6:$VERSION &> /dev/null || (echo "roboxes-centos6-version download failed" | tee -a failed.log) && echo "roboxes-centos6-version download complete") &
   - (travis_retry docker pull roboxes/centos7:$VERSION &> /dev/null || (echo "roboxes-centos7-version download failed" | tee -a failed.log) && echo "roboxes-centos7-version download complete") &
+  - (travis_retry docker pull roboxes/centos8:$VERSION &> /dev/null || (echo "roboxes-centos8-version download failed" | tee -a failed.log) && echo "roboxes-centos8-version download complete") &
   - (travis_retry docker pull roboxes/oracle7:$VERSION &> /dev/null || (echo "roboxes-oracle7-version download failed" | tee -a failed.log) && echo "roboxes-oracle7-version download complete") &
   - (travis_retry docker pull roboxes/oracle8:$VERSION &> /dev/null || (echo "roboxes-oracle8-version download failed" | tee -a failed.log) && echo "roboxes-oracle8-version download complete") &
   - (travis_retry docker pull roboxes/rhel6:$VERSION &> /dev/null || (echo "roboxes-rhel6-version download failed" | tee -a failed.log) && echo "roboxes-rhel6-version download complete") &
@@ -50,6 +83,7 @@ script:
   - wait
   - (travis_retry docker pull roboxes/centos6:latest &> /dev/null || (echo "roboxes-centos6-latest download failed" | tee -a failed.log) && echo "roboxes-centos6-latest download complete") &
   - (travis_retry docker pull roboxes/centos7:latest &> /dev/null || (echo "roboxes-centos7-latest download failed" | tee -a failed.log) && echo "roboxes-centos7-latest download complete") &
+  - (travis_retry docker pull roboxes/centos8:latest &> /dev/null || (echo "roboxes-centos8-latest download failed" | tee -a failed.log) && echo "roboxes-centos8-latest download complete") &
   - (travis_retry docker pull roboxes/oracle7:latest &> /dev/null || (echo "roboxes-oracle7-latest download failed" | tee -a failed.log) && echo "roboxes-oracle7-latest download complete") &
   - (travis_retry docker pull roboxes/oracle8:latest &> /dev/null || (echo "roboxes-oracle8-latest download failed" | tee -a failed.log) && echo "roboxes-oracle8-latest download complete") &
   - (travis_retry docker pull roboxes/rhel6:latest &> /dev/null || (echo "roboxes-rhel6-latest download failed" | tee -a failed.log) && echo "roboxes-rhel6-latest download complete") &
@@ -63,6 +97,7 @@ script:
   - docker images -a && docker rmi `docker images -q -a`
   - (travis_retry docker run roboxes/centos6:$VERSION curl --silent --show-error --user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" https://lavabit.com > /dev/null || (echo "roboxes-centos6-version run failed" | tee -a failed.log) && echo "roboxes-centos6-version run complete") &
   - (travis_retry docker run roboxes/centos7:$VERSION curl --silent --show-error --user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" https://lavabit.com > /dev/null || (echo "roboxes-centos7-version run failed" | tee -a failed.log) && echo "roboxes-centos7-version run complete") &
+  - (travis_retry docker run roboxes/centos8:$VERSION curl --silent --show-error --user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" https://lavabit.com > /dev/null || (echo "roboxes-centos8-version run failed" | tee -a failed.log) && echo "roboxes-centos8-version run complete") &
   - (travis_retry docker run roboxes/oracle7:$VERSION curl --silent --show-error --user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" https://lavabit.com > /dev/null || (echo "roboxes-oracle7-version run failed" | tee -a failed.log) && echo "roboxes-oracle7-version run complete") &
   - (travis_retry docker run roboxes/oracle8:$VERSION curl --silent --show-error --user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" https://lavabit.com > /dev/null || (echo "roboxes-oracle8-version run failed" | tee -a failed.log) && echo "roboxes-oracle8-version run complete") &
   - (travis_retry docker run roboxes/rhel6:$VERSION curl --silent --show-error --user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" https://lavabit.com > /dev/null || (echo "roboxes-rhel6-version run failed" | tee -a failed.log) && echo "roboxes-rhel6-version run complete") &
@@ -76,6 +111,7 @@ script:
   - docker rm `docker ps -q -a` && docker rmi `docker images -q -a`
   - (travis_retry docker run roboxes/centos6:latest curl --silent --show-error --user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" https://lavabit.com > /dev/null || (echo "roboxes-centos6-latest run failed" | tee -a failed.log) && echo "roboxes-centos6-latest run complete") &
   - (travis_retry docker run roboxes/centos7:latest curl --silent --show-error --user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" https://lavabit.com > /dev/null || (echo "roboxes-centos7-latest run failed" | tee -a failed.log) && echo "roboxes-centos7-latest run complete") &
+  - (travis_retry docker run roboxes/centos8:latest curl --silent --show-error --user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" https://lavabit.com > /dev/null || (echo "roboxes-centos8-latest run failed" | tee -a failed.log) && echo "roboxes-centos8-latest run complete") &
   - (travis_retry docker run roboxes/oracle7:latest curl --silent --show-error --user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" https://lavabit.com > /dev/null || (echo "roboxes-oracle7-latest run failed" | tee -a failed.log) && echo "roboxes-oracle7-latest run complete") &
   - (travis_retry docker run roboxes/oracle8:latest curl --silent --show-error --user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" https://lavabit.com > /dev/null || (echo "roboxes-oracle8-latest run failed" | tee -a failed.log) && echo "roboxes-oracle8-latest run complete") &
   - (travis_retry docker run roboxes/rhel6:latest curl --silent --show-error --user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0" https://lavabit.com > /dev/null || (echo "roboxes-rhel6-latest run failed" | tee -a failed.log) && echo "roboxes-rhel6-latest run complete") &
