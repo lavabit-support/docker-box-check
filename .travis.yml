@@ -6,7 +6,7 @@ matrix:
       dist: trusty
       env:
         - VERSION="latest"
-	- name: XENIAL / LATEST
+    - name: XENIAL / LATEST
       dist: xenial
       env:
         - VERSION="latest"
