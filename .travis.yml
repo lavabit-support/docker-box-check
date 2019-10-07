@@ -10,38 +10,6 @@ matrix:
       dist: xenial
       env:
         - VERSION="latest"
-    - name: XENIAL / 1.9.34
-      dist: xenial
-      env:
-        - VERSION="1.9.34"
-    - name: XENIAL / 1.9.32
-      dist: xenial
-      env:
-        - VERSION="1.9.32"
-    - name: XENIAL / 1.9.30
-      dist: xenial
-      env:
-        - VERSION="1.9.30"
-    - name: XENIAL / 1.9.28
-      dist: xenial
-      env:
-        - VERSION="1.9.28"
-    - name: XENIAL / 1.9.26
-      dist: xenial
-      env:
-        - VERSION="1.9.26"
-    - name: XENIAL / 1.9.24
-      dist: xenial
-      env:
-        - VERSION="1.9.24"
-    - name: XENIAL / 1.9.22
-      dist: xenial
-      env:
-        - VERSION="1.9.22"
-    - name: XENIAL / 1.9.20
-      dist: xenial
-      env:
-        - VERSION="1.9.20"
 notifications:
   email:
     recipients:
