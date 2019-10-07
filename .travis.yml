@@ -2,7 +2,7 @@ os: linux
 language: generic
 matrix:
   include:
-    - name: TRUSTY / latest
+    - name: TRUSTY / LATEST
       dist: trusty
       env:
         - VERSION="latest"
