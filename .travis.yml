@@ -10,6 +10,26 @@ matrix:
       dist: xenial
       env:
         - VERSION="latest"
+    - name: XENIAL / 3.0.6
+      dist: xenial
+      env:
+        - VERSION="3.0.6"
+    - name: XENIAL / 3.0.4
+      dist: xenial
+      env:
+        - VERSION="3.0.4"
+    - name: XENIAL / 3.0.2
+      dist: xenial
+      env:
+        - VERSION="3.0.2"
+    - name: XENIAL / 3.0.0
+      dist: xenial
+      env:
+        - VERSION="3.0.0"
+    - name: XENIAL / 2.0.6
+      dist: xenial
+      env:
+        - VERSION="2.0.6"
     - name: XENIAL / 2.0.4
       dist: xenial
       env:
